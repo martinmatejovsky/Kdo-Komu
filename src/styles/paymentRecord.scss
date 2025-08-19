@@ -1,0 +1,44 @@
+.payment-record {
+  display: flex;
+  background-color: #FAEBD7;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0 1rem 1rem;
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__names {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+@media screen and (width >= 600px) {
+  .payment-record {
+    &__description {
+      flex-direction: row;
+      flex-grow: 1;
+    }
+
+    &__names,
+    &__subject {
+      flex-basis: 50%;
+    }
+
+    &__subject {
+      order: 2;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    &__price {
+      flex-basis: 80px;
+      text-align: right;
+    }
+  }
+}
