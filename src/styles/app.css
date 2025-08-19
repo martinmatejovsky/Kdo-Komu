@@ -1,0 +1,11 @@
+#root {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.payment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
