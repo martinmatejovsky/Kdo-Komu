@@ -1,0 +1,43 @@
+@import "variables";
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem;
+  background-color: $col-gray-1;
+
+  &__wrapper {
+    margin: 0 auto;
+    max-width: 800px;
+    min-height: 100%;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: $col-gray-1;
+  }
+
+  &__close {
+    margin-left: auto;
+  }
+
+  &__content {
+    padding: 0.5rem;
+    background-color: #fff;
+    border-radius: 1rem;
+  }
+
+  @media screen and (width >= $width-tablet) {
+    padding: 1rem;
+
+    &__content {
+      padding: 1rem;
+    }
+  }
+}
+

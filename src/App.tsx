@@ -1,7 +1,8 @@
 import {USERS, PAYMENTS} from './assets/MockHistory.ts'
-import {useCallback, useMemo, useState} from "react";
+import {useState} from "react";
 import './styles/app.css'
 import PaymentOverview from "./components/PaymentIOverview.tsx";
+import Overlay from "./components/Overlay.tsx";
 
 function App() {
     const [creatingPayment, setCreatingPayment] = useState(false)
@@ -13,10 +14,10 @@ function App() {
             </h1>
 
             <div className="controls">
-                <button type={'button'} className={'new-payment'} onClick={() => {
+                <button type={'button'} className={'primary new-payment'} onClick={() => {
                     setCreatingPayment((oldVal) => !oldVal)
                 }}>
-                    Nová platba
+                    nová platba
                 </button>
             </div>
 
@@ -28,6 +29,12 @@ function App() {
             </section>
 
             <PaymentOverview payments={PAYMENTS} users={USERS}/>
+
+            {creatingPayment &&
+                <Overlay title={'Nová platba'} setClose={setCreatingPayment}>
+                  ...overlay content
+                </Overlay>
+            }
         </div>
     )
 }
