@@ -2,10 +2,16 @@ import {useCallback, useMemo, useState} from "react";
 import PaymentRecord from "./PaymentRecord.tsx";
 import type {PaymentDescription, Payment, User} from "../assets/types.ts";
 import {memo} from "react";
+import '../styles/payment-overview.scss'
+
+interface Props {
+    payments: Payment[],
+    users: User[]
+}
 
 const lastVisiblePayments = 5
 
-const PaymentOverview = memo(function PaymentOverview({payments, users}: { payments: Payment[], users: User[] }) {
+const PaymentOverview = memo(function PaymentOverview({payments, users}: Props) {
     const [showingAllPayments, setShowingAllPayments] = useState(false)
 
     const convertPaymentLabels = useCallback((from: number, to: number) => {
@@ -56,7 +62,7 @@ const PaymentOverview = memo(function PaymentOverview({payments, users}: { payme
                 </ol>
             </div>
 
-            <button type={'button'} className={'payment-list-toggle'} onClick={() => {
+            <button type={'button'} className={'primary payment-list-toggle'} onClick={() => {
                 setShowingAllPayments((oldVal) => !oldVal)
             }}>
                 {showingAllPayments ? 'schovej starší' : 'ukaž starší'}

@@ -40,16 +40,36 @@ section {
 }
 
 button {
-  padding: 0.5rem 1.5rem;
-  border: 1px solid #b68557;
-  border-radius: 0.5rem;
-  background-color: $col-primary;
   box-shadow: #00000088 2px 2px 2px 0;
   cursor: pointer;
   transition: all 0.3s;
 
   &:hover {
-    background-color: color.adjust($col-primary, $lightness: -5%);
     box-shadow: #00000088 0 0 2px 0;
+  }
+
+  &.primary {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #b68557;
+    border-radius: 0.5rem;
+    background-color: $col-primary;
+
+    &:hover {
+      background-color: color.adjust($col-primary, $lightness: -5%);
+    }
+  }
+
+  &.close {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0 none;
+    border-radius: 50%;
+    background-color: $col-danger;
+    color: #fff;
+
+    &:hover {
+      background-color: color.adjust($col-danger, $lightness: -7%);
+    }
   }
 }

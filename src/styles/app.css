@@ -4,20 +4,6 @@
     padding: 0 1rem;
 }
 
-.payment-wrapper {
-    display: grid;
-    grid-template-rows: 1fr;
-    transition: grid-template-rows 0.5s ease-out;
-}
-
-.payment-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    overflow: hidden;
-}
-
-.payment-list-toggle {
-    float: right;
+.controls {
+    text-align: right;
 }
