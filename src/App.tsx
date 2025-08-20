@@ -1,31 +1,24 @@
 import {USERS, PAYMENTS} from './assets/MockHistory.ts'
-import {useMemo} from "react";
-import PaymentRecord from "./components/PaymentRecord.tsx";
-import type {PaymentDescription} from './assets/types.ts'
+import {useCallback, useMemo, useState} from "react";
 import './styles/app.css'
+import PaymentOverview from "./components/PaymentIOverview.tsx";
 
 function App() {
-    const paymentTags = useMemo((): PaymentDescription[] => {
-        return PAYMENTS.map(payment => {
-            const paidForNames: string[] = payment.to.map((id) => {
-                return USERS.find((user) => user.id === id)?.name || '-'
-            })
-
-            return {
-                id: payment.id,
-                paidByName: USERS.find((user) => user.id === payment.from)?.name || '-',
-                paidForNames: paidForNames,
-                amount: payment.amount,
-                subject: payment.subject,
-            }
-        })
-    }, []);
+    const [creatingPayment, setCreatingPayment] = useState(false)
 
     return (
         <div>
             <h1>
                 Kdo-Komu
             </h1>
+
+            <div className="controls">
+                <button type={'button'} className={'new-payment'} onClick={() => {
+                    setCreatingPayment((oldVal) => !oldVal)
+                }}>
+                    Nová platba
+                </button>
+            </div>
 
             <section>
                 <h2>Lidé</h2>
@@ -34,16 +27,7 @@ function App() {
                 </p>
             </section>
 
-            <section>
-                <h2>Platby</h2>
-                <ol className={'payment-list'}>
-                    {paymentTags.map((payment) => (
-                        <li key={payment.id}>
-                            <PaymentRecord data={payment}></PaymentRecord>
-                        </li>
-                    ))}
-                </ol>
-            </section>
+            <PaymentOverview payments={PAYMENTS} users={USERS}/>
         </div>
     )
 }
