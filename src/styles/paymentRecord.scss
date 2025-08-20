@@ -1,5 +1,6 @@
 .payment-record {
   display: flex;
+  column-gap: 0.2rem;
   background-color: #FAEBD7;
   align-items: center;
   justify-content: space-between;
@@ -15,6 +16,10 @@
   &__names {
     display: flex;
     gap: 0.5rem;
+  }
+
+  &__price {
+    text-align: right;
   }
 }
 
@@ -38,7 +43,6 @@
 
     &__price {
       flex-basis: 80px;
-      text-align: right;
     }
   }
 }

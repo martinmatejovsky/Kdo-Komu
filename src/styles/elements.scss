@@ -1,3 +1,6 @@
+@use "sass:color";
+@import "variables";
+
 body {
   margin: 0;
   background-color: #fff6ee;
@@ -10,7 +13,7 @@ h1 {
   text-align: center;
   font-weight: bold;
   font-size: 2rem;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: $col-primary;
   border-radius: 0 0 1rem 1rem;
 }
 
@@ -33,5 +36,20 @@ ol {
 section {
   &:not(:last-child) {
     margin-bottom: 2rem;
+  }
+}
+
+button {
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #b68557;
+  border-radius: 0.5rem;
+  background-color: $col-primary;
+  box-shadow: #00000088 2px 2px 2px 0;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: color.adjust($col-primary, $lightness: -5%);
+    box-shadow: #00000088 0 0 2px 0;
   }
 }
