@@ -3,6 +3,7 @@ import {useState} from "react";
 import './styles/app.css'
 import PaymentOverview from "./components/PaymentIOverview.tsx";
 import Overlay from "./components/Overlay.tsx";
+import FormNewPayment from "./components/FormNewPayment.tsx";
 
 function App() {
     const [creatingPayment, setCreatingPayment] = useState(false)
@@ -12,6 +13,8 @@ function App() {
             <h1>
                 Kdo-Komu
             </h1>
+
+            <FormNewPayment/>
 
             <div className="controls">
                 <button type={'button'} className={'primary new-payment'} onClick={() => {

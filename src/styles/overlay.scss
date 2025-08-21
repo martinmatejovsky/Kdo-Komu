@@ -29,7 +29,7 @@
   &__content {
     padding: 0.5rem;
     background-color: #fff;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
   }
 
   @media screen and (width >= $width-tablet) {
@@ -37,6 +37,7 @@
 
     &__content {
       padding: 1rem;
+      border-radius: 1rem;
     }
   }
 }

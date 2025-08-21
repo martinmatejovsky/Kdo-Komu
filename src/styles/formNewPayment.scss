@@ -1,0 +1,11 @@
+.form-new-payment {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}

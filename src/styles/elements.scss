@@ -42,6 +42,7 @@ section {
 button {
   box-shadow: #00000088 2px 2px 2px 0;
   cursor: pointer;
+  font-size: 1.2rem;
   transition: all 0.3s;
 
   &:hover {
@@ -72,4 +73,23 @@ button {
       background-color: color.adjust($col-danger, $lightness: -7%);
     }
   }
+}
+
+label,
+input,
+select {
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+legend {
+  font-size: 1.2rem;
+}
+
+input,
+select {
+  padding: 0.5rem;
+  border: 1px solid #000;
+  border-radius: 6px;
+  font-size: 1.2rem;
 }

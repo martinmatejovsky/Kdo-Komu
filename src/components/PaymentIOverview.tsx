@@ -62,11 +62,13 @@ const PaymentOverview = memo(function PaymentOverview({payments, users}: Props) 
                 </ol>
             </div>
 
-            <button type={'button'} className={'primary payment-list-toggle'} onClick={() => {
-                setShowingAllPayments((oldVal) => !oldVal)
-            }}>
-                {showingAllPayments ? 'schovej starší' : 'ukaž starší'}
-            </button>
+            <div className="controls">
+                <button type={'button'} className={'primary'} onClick={() => {
+                    setShowingAllPayments((oldVal) => !oldVal)
+                }}>
+                    {showingAllPayments ? 'schovej starší' : 'ukaž starší'}
+                </button>
+            </div>
         </section>
     )
 })
