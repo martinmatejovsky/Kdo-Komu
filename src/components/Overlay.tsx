@@ -15,7 +15,8 @@ const Overlay = ({children, setClose, title}: Props) => {
                     {title && <h2>{title}</h2>}
 
                     <button type={'button'} onClick={() => setClose(false)}
-                            className="close overlay__close">&#10006;</button>
+                            className="close overlay__close">&#10006;
+                    </button>
                 </div>
 
                 <div className="overlay__content">

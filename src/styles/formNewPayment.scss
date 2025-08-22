@@ -1,3 +1,5 @@
+@import "variables";
+
 .form-new-payment {
   display: flex;
   flex-direction: column;
@@ -7,5 +9,11 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+  }
+
+  .form-error {
+    padding: 1rem;
+    border: 1px solid $col-danger;
+    color: $col-danger;
   }
 }

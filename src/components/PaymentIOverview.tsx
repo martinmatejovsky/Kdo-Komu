@@ -14,10 +14,12 @@ const lastVisiblePayments = 5
 const PaymentOverview = memo(function PaymentOverview({payments, users}: Props) {
     const [showingAllPayments, setShowingAllPayments] = useState(false)
 
-    const convertPaymentLabels = useCallback((from: number, to: number) => {
+    const reversedPayments = useMemo(() => [...payments].reverse(), [payments])
+
+    const convertPaymentLabels = useCallback((to: number): PaymentDescription[] => {
         const visiblePayments: PaymentDescription[] = []
 
-        for (const payment of payments.slice(from, to)) {
+        for (const payment of reversedPayments.slice(0, to)) {
             const paidForNames: string[] = payment.to.map((id) => {
                 return users.find((user) => user.id === id)?.name || '-'
             })
@@ -31,30 +33,20 @@ const PaymentOverview = memo(function PaymentOverview({payments, users}: Props) 
             })
         }
         return visiblePayments
-    }, [payments, users])
+    }, [reversedPayments, users])
 
-    const lastPaymentTags = useMemo((): PaymentDescription[] => {
-        return convertPaymentLabels(0, lastVisiblePayments)
-    }, [convertPaymentLabels]);
-
-    const restPaymentTags = useMemo((): PaymentDescription[] => {
-        if (!showingAllPayments || payments.length <= lastVisiblePayments) return []
-
-        return convertPaymentLabels(lastVisiblePayments, payments.length)
-    }, [payments, showingAllPayments, convertPaymentLabels])
+    const visiblePayments = useMemo((): PaymentDescription[] => {
+        return showingAllPayments ?
+            convertPaymentLabels(reversedPayments.length) :
+            convertPaymentLabels(lastVisiblePayments)
+    }, [reversedPayments, showingAllPayments, convertPaymentLabels])
 
     return (
         <section>
             <h2>Provedené platby</h2>
             <div className="payment-wrapper">
                 <ol className={'payment-list'}>
-                    {lastPaymentTags.map((payment) => (
-                        <li key={payment.id}>
-                            <PaymentRecord data={payment}/>
-                        </li>
-                    ))}
-
-                    {restPaymentTags.length > 0 && restPaymentTags.map((payment) => (
+                    {visiblePayments.map((payment) => (
                         <li key={payment.id}>
                             <PaymentRecord data={payment}/>
                         </li>

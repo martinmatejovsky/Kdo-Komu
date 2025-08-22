@@ -7,14 +7,13 @@ import FormNewPayment from "./components/FormNewPayment.tsx";
 
 function App() {
     const [creatingPayment, setCreatingPayment] = useState(false)
+    const [payments, setPayments] = useState(PAYMENTS)
 
     return (
         <div>
             <h1>
                 Kdo-Komu
             </h1>
-
-            <FormNewPayment/>
 
             <div className="controls">
                 <button type={'button'} className={'primary new-payment'} onClick={() => {
@@ -31,11 +30,11 @@ function App() {
                 </p>
             </section>
 
-            <PaymentOverview payments={PAYMENTS} users={USERS}/>
+            <PaymentOverview payments={payments} users={USERS}/>
 
             {creatingPayment &&
                 <Overlay title={'Nová platba'} setClose={setCreatingPayment}>
-                  ...overlay content
+                  <FormNewPayment setPayments={setPayments} onSubmit={() => setCreatingPayment(false)}/>
                 </Overlay>
             }
         </div>
