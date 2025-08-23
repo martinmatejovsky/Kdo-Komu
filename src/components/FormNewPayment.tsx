@@ -1,5 +1,5 @@
 import {USERS} from '../assets/MockHistory'
-import '../styles/formNewPayment.scss'
+import '../styles/form.scss'
 import {type Dispatch, type FormEvent, type SetStateAction, useState} from "react";
 import type {Payment} from "../assets/types.ts";
 
@@ -43,7 +43,7 @@ function FormNewPayment({setPayments, onSubmit}: Props) {
     }
 
     return (
-        <form className={'form-new-payment'} id={'new-payment'} onSubmit={(e) => submitNewPayment(e)}>
+        <form className={'form'} id={'new-payment'} onSubmit={(e) => submitNewPayment(e)}>
             <div className={'form-row'}>
                 <label htmlFor="amount">Kolik</label>
                 <input type="number" id={'amount'} name={'amount'} defaultValue={undefined} required={true}/>

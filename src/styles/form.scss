@@ -1,6 +1,6 @@
 @import "variables";
 
-.form-new-payment {
+.form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -15,5 +15,19 @@
     padding: 1rem;
     border: 1px solid $col-danger;
     color: $col-danger;
+  }
+
+  .input-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+  }
+
+  .form-list {
+    margin: 1rem 0;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
   }
 }

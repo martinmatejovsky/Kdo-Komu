@@ -3,7 +3,7 @@
 
 body {
   margin: 0;
-  background-color: #fff6ee;
+  background-color: $col-secondary;
   font-family: Arial, sans-serif;
 }
 
@@ -45,7 +45,7 @@ button {
   font-size: 1.2rem;
   transition: all 0.3s;
 
-  &:hover {
+  &:not(:disabled):hover {
     box-shadow: #00000088 0 0 2px 0;
   }
 
@@ -56,7 +56,18 @@ button {
     background-color: $col-primary;
 
     &:hover {
-      background-color: color.adjust($col-primary, $lightness: -5%);
+      background-color: $col-primary-shade;
+    }
+  }
+
+  &.secondary {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #b68557;
+    border-radius: 0.5rem;
+    background-color: $col-secondary;
+
+    &:hover {
+      background-color: $col-secondary-shade;
     }
   }
 
@@ -88,8 +99,13 @@ legend {
 
 input,
 select {
+  max-width: 250px;
   padding: 0.5rem;
-  border: 1px solid #000;
+  border: 1px solid $col-primary-shade;
   border-radius: 6px;
   font-size: 1.2rem;
+}
+
+fieldset {
+  min-width: 0;
 }

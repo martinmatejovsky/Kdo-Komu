@@ -1,0 +1,28 @@
+@import "variables";
+
+.page-home {
+  &__groups {
+    padding: 1.5rem 0;
+  }
+
+  &__group-tile {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    border: 1px solid $col-secondary-shade;
+    border-radius: 1rem;
+    transition: background-color 0.3s;
+    cursor: pointer;
+
+    &--name {
+      font-size: 1.6rem;
+    }
+
+    &:hover {
+      background-color: $col-secondary;
+    }
+  }
+}

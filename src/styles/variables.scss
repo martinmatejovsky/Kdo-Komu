@@ -1,5 +1,10 @@
+@use "sass:color";
+
 $col-primary: #ffba79;
-$col-danger: #ff2929;
+$col-primary-shade: color.adjust($col-primary, $lightness: -5%);
+$col-secondary: #fff9f3;
+$col-secondary-shade: color.adjust($col-secondary, $lightness: -5%);
+$col-danger: #ff6060;
 $col-gray-1: #e8e8e8;
 
 $width-tablet: 600px;

@@ -18,3 +18,10 @@ export interface PaymentDescription {
     amount: number,
     subject?: string,
 }
+
+export interface Group {
+    id: number,
+    name: string,
+    members: User[],
+    payments: Payment[],
+}
