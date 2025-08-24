@@ -1,15 +1,25 @@
-import {useState} from "react";
+import {type Dispatch, type SetStateAction, useState} from "react";
 import Overlay from "../components/Overlay.tsx";
 import FormNewGroup from "../components/FormNewGroup.tsx";
 import type {Group} from "../assets/types.ts"
 import '../styles/page-home.scss'
+import {useNavigate} from "react-router-dom";
 
-function PageHome() {
+interface Props {
+    groups: Group[],
+    setGroups: Dispatch<SetStateAction<Group[]>>
+}
+
+function PageHome({groups, setGroups}: Props) {
     const [modalNewProject, setModalNewProject] = useState(false)
-    const [groups, setGroups] = useState<Group[]>([])
+    let navigate = useNavigate()
 
     function setNewGroup(newGroup: Group) {
         setGroups([...groups, newGroup])
+    }
+
+    function openGroup(id: number): void {
+        navigate(`/group/${id}`)
     }
 
     return (
@@ -30,11 +40,11 @@ function PageHome() {
                     {groups.length === 0 && <p>Zatím nemáte žádnou uloženou skupinu</p>}
 
                     {groups.map((g) => (
-                        <div className="page-home__group-tile">
+                        <div key={g.id} className="page-home__group-tile" onClick={() => openGroup(g.id)}>
                             <span className="page-home__group-tile--name">{g.name}</span>
                             <span>členové:&nbsp;
                                 {g.members.map(m => m.name).join(', ')}
-                        </span>
+                            </span>
                         </div>
                     ))}
                 </section>

@@ -45,6 +45,10 @@ const PaymentOverview = memo(function PaymentOverview({payments, users}: Props) 
         <section>
             <h2>Provedené platby</h2>
             <div className="payment-wrapper">
+                {payments.length === 0 && (
+                    <p>zatím nemáte žádnou uloženou platbu</p>
+                )}
+
                 <ol className={'payment-list'}>
                     {visiblePayments.map((payment) => (
                         <li key={payment.id}>
@@ -54,13 +58,15 @@ const PaymentOverview = memo(function PaymentOverview({payments, users}: Props) 
                 </ol>
             </div>
 
-            <div className="controls">
-                <button type={'button'} className={'primary'} onClick={() => {
-                    setShowingAllPayments((oldVal) => !oldVal)
-                }}>
-                    {showingAllPayments ? 'schovej starší' : 'ukaž starší'}
-                </button>
-            </div>
+            {payments.length > lastVisiblePayments && (
+                <div className="controls">
+                    <button type={'button'} className={'primary'} onClick={() => {
+                        setShowingAllPayments((oldVal) => !oldVal)
+                    }}>
+                        {showingAllPayments ? 'schovej starší' : 'ukaž starší'}
+                    </button>
+                </div>
+            )}
         </section>
     )
 })

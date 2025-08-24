@@ -1,14 +1,14 @@
 import {USERS} from '../assets/MockHistory'
 import '../styles/form.scss'
-import {type Dispatch, type FormEvent, type SetStateAction, useState} from "react";
+import {type FormEvent, useState} from "react";
 import type {Payment} from "../assets/types.ts";
 
 interface Props {
-    setPayments: Dispatch<SetStateAction<Payment[]>>,
+    addPayment: (newPaymet: Payment) => void,
     onSubmit?: Function
 }
 
-function FormNewPayment({setPayments, onSubmit}: Props) {
+function FormNewPayment({addPayment, onSubmit}: Props) {
     const [paidForError, setPaidForError] = useState(false)
 
     function submitNewPayment(e: FormEvent) {
@@ -25,17 +25,14 @@ function FormNewPayment({setPayments, onSubmit}: Props) {
         const paidBy = formData.get('paid-by');
         const topic = formData.get('topic');
 
-        setPayments((prevState): Payment[] => {
-            const newItem: Payment = {
-                id: prevState[prevState.length - 1].id + 1,
-                from: Number(paidBy),
-                to: paidFor.map((el) => Number(el)),
-                amount: Number(amount),
-                subject: String(topic),
-            }
-
-            return [...prevState, newItem]
-        })
+        const newItem: Payment = {
+            id: Date.now(),
+            from: Number(paidBy),
+            to: paidFor.map((el) => Number(el)),
+            amount: Number(amount),
+            subject: String(topic),
+        }
+        addPayment(newItem)
 
         const form = document.getElementById('new-payment');
         if (form instanceof HTMLFormElement) form.reset()
