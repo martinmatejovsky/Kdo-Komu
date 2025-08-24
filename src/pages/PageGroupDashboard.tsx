@@ -3,7 +3,7 @@ import PaymentOverview from "../components/PaymentsOverview.tsx";
 import Overlay from "../components/Overlay.tsx";
 import FormNewPayment from "../components/FormNewPayment.tsx";
 import {type Dispatch, type SetStateAction, useState} from "react";
-import type {Group, Payment} from "../assets/types.ts"
+import type {Group} from "../assets/types.ts"
 import {useParams, useNavigate} from "react-router-dom";
 
 interface Props {
@@ -23,19 +23,6 @@ function PageGroupDashboard({groups, setGroups}: Props) {
 
     let navigate = useNavigate()
     const [creatingPayment, setCreatingPayment] = useState(false)
-
-    function addPayment(newPayment: Payment) {
-        setGroups(() => (
-            groups.map(g => {
-                return g.id === selectedGroupId ?
-                    {
-                        ...g,
-                        payments: [...g.payments, newPayment]
-                    }
-                    : g
-            }))
-        )
-    }
 
     return (
         <div>
@@ -66,7 +53,8 @@ function PageGroupDashboard({groups, setGroups}: Props) {
 
             {creatingPayment &&
                 <Overlay title={'Nová platba'} setClose={setCreatingPayment}>
-                  <FormNewPayment addPayment={addPayment} onSubmit={() => setCreatingPayment(false)}/>
+                  <FormNewPayment setGroups={setGroups} selectedGroupId={selectedGroupId}
+                                  onSubmit={() => setCreatingPayment(false)}/>
                 </Overlay>
             }
         </div>

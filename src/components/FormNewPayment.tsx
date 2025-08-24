@@ -1,15 +1,35 @@
 import {USERS} from '../assets/MockHistory'
 import '../styles/form.scss'
-import {type FormEvent, useState} from "react";
-import type {Payment} from "../assets/types.ts";
+import {type Dispatch, type FormEvent, type SetStateAction, useState} from "react";
+import type {Group, Payment} from "../assets/types.ts";
 
 interface Props {
-    addPayment: (newPaymet: Payment) => void,
+    setGroups: Dispatch<SetStateAction<Group[]>>,
+    selectedGroupId: number,
     onSubmit?: Function
 }
 
-function FormNewPayment({addPayment, onSubmit}: Props) {
+function FormNewPayment({setGroups, selectedGroupId, onSubmit}: Props) {
     const [paidForError, setPaidForError] = useState(false)
+    const formHtmlId = 'new-payment'
+
+    function addPayment(newPayment: Payment): void {
+        setGroups(oldVal => (
+            oldVal.map(g => (
+                g.id === selectedGroupId
+                    ? {
+                        ...g,
+                        payments: [...g.payments, newPayment]
+                    }
+                    : g
+            )))
+        )
+    }
+
+    function clearForm() {
+        const form = document.getElementById(formHtmlId);
+        if (form instanceof HTMLFormElement) form.reset()
+    }
 
     function submitNewPayment(e: FormEvent) {
         e.preventDefault();
@@ -32,15 +52,14 @@ function FormNewPayment({addPayment, onSubmit}: Props) {
             amount: Number(amount),
             subject: String(topic),
         }
-        addPayment(newItem)
 
-        const form = document.getElementById('new-payment');
-        if (form instanceof HTMLFormElement) form.reset()
+        addPayment(newItem)
+        clearForm()
         if (onSubmit) onSubmit()
     }
 
     return (
-        <form className={'form'} id={'new-payment'} onSubmit={(e) => submitNewPayment(e)}>
+        <form className={'form'} id={formHtmlId} onSubmit={(e) => submitNewPayment(e)}>
             <div className={'form-row'}>
                 <label htmlFor="amount">Kolik</label>
                 <input type="number" id={'amount'} name={'amount'} defaultValue={undefined} required={true}/>

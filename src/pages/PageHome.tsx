@@ -50,7 +50,7 @@ function PageHome({groups, setGroups}: Props) {
                 </section>
             </main>
 
-            {modalNewProject && <Overlay title={'Vytvořit nový projekt'} setClose={() => setModalNewProject(false)}>
+            {modalNewProject && <Overlay title={'Vytvořit novou skupinu'} setClose={() => setModalNewProject(false)}>
               <FormNewGroup setNewGroup={setNewGroup} onSubmit={() => setModalNewProject(false)}/>
             </Overlay>}
         </div>
