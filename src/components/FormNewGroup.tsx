@@ -58,17 +58,20 @@ function FormNewGroup({setNewGroup, onSubmit}: Props) {
                     <p className={'form-error'}>Je nutné zadat alespoň jednoho člena skupiny</p>
                 )}
 
-                <label htmlFor="memberName">Jméno člena</label>
-                <div className={'input-controls'}>
-                    <input type="text" value={newMember} name={'memberName'} id={'memberName'}
-                           onChange={e => setNewMember(e.target.value)}/>
-                    <button type={'button'} className={'secondary'} onClick={() => addMember(newMember)}>přidat</button>
+                <div className="form-row">
+                    <label htmlFor="memberName">Jméno člena</label>
+                    <div className={'input-controls'}>
+                        <input type="text" value={newMember} name={'memberName'} id={'memberName'}
+                               onChange={e => setNewMember(e.target.value)}/>
+                        <button type={'button'} className={'secondary'} onClick={() => addMember(newMember)}>přidat
+                        </button>
+                    </div>
                 </div>
 
                 <ul className={'form-list'}>
                     {members.map(member => (
                         <li key={member.id}>
-                            <strong>{member.name}</strong>,
+                            <strong>{member.name}</strong>
                         </li>
                     ))}
                 </ul>

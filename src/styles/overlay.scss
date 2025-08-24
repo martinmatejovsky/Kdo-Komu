@@ -4,15 +4,21 @@
   position: fixed;
   top: 0;
   right: 0;
-  bottom: 0;
   left: 0;
-  padding: 0.5rem;
-  background-color: $col-gray-1;
+  bottom: 0;
+  display: flex;
+  padding: 6rem 1rem 1rem;
+  background-color: rgba($col-gray-1, 0.9);
 
   &__wrapper {
+    box-sizing: border-box;
     margin: 0 auto;
     max-width: 800px;
     min-height: 100%;
+    border-radius: 1rem;
+    border: 2px solid #fff;
+    overflow: auto;
+    background-color: #fff;
   }
 
   &__controls {
@@ -22,22 +28,18 @@
     background-color: $col-gray-1;
   }
 
+
   &__close {
     margin-left: auto;
   }
 
   &__content {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     background-color: #fff;
-    border-radius: 0.5rem;
   }
 
   @media screen and (width >= $width-tablet) {
-    padding: 1rem;
-
-    &__content {
-      border-radius: 1rem;
-    }
+    padding: 8rem 1rem;
   }
 }
 

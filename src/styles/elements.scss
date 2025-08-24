@@ -8,7 +8,7 @@ body {
 }
 
 h1 {
-  margin: 0 0 1rem 0;
+  margin: 0 0 3rem 0;
   padding: 0.5rem;
   text-align: center;
   font-weight: bold;
@@ -35,7 +35,7 @@ ol {
 
 section {
   &:not(:last-child) {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
 }
 
@@ -45,12 +45,16 @@ button {
   font-size: 1.2rem;
   transition: all 0.3s;
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+  
   &:not(:disabled):hover {
     box-shadow: #00000088 0 0 2px 0;
   }
 
   &.primary {
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 2.5rem;
     border: 1px solid #b68557;
     border-radius: 0.5rem;
     background-color: $col-primary;
@@ -61,7 +65,7 @@ button {
   }
 
   &.secondary {
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 2.5rem;
     border: 1px solid #b68557;
     border-radius: 0.5rem;
     background-color: $col-secondary;
@@ -108,4 +112,5 @@ select {
 
 fieldset {
   min-width: 0;
+  padding: 1rem;
 }

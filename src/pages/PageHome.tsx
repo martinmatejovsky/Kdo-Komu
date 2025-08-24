@@ -27,14 +27,17 @@ function PageHome({groups, setGroups}: Props) {
             <h1>Kdo-Komu</h1>
 
             <main>
-                <p>Aplikace pro výpočet vyrovnání plateb ve skupině lidí</p>
+                <section className="section">
+                    <p>Aplikace pro výpočet vyrovnání plateb ve skupině lidí</p>
 
-                <div className="controls">
-                    <button type={"button"} className={'primary'} onClick={() => setModalNewProject(true)}>Nová skupina
-                    </button>
-                </div>
+                    <div className="controls">
+                        <button type={"button"} className={'primary'} onClick={() => setModalNewProject(true)}>Nová
+                            skupina
+                        </button>
+                    </div>
+                </section>
 
-                <section className="page-home__groups">
+                <section className="section">
                     <h2>Stávající skupiny</h2>
 
                     {groups.length === 0 && <p>Zatím nemáte žádnou uloženou skupinu</p>}

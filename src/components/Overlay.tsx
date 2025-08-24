@@ -19,11 +19,11 @@ const Overlay = ({children, setClose, title}: Props) => {
                     </button>
                 </div>
 
-                <div className="overlay__content">
+                <section className="overlay__content">
                     {
                         children
                     }
-                </div>
+                </section>
             </div>
         </div>
     )

@@ -12,3 +12,9 @@
         margin-left: auto;
     }
 }
+
+.section {
+    padding: 1.4rem 1rem;
+    background-color: #fff;
+    border-radius: 1rem;
+}
