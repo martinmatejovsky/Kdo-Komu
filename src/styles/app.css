@@ -1,0 +1,21 @@
+#root {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+
+    :last-child {
+        margin-left: auto;
+    }
+}
+
+.section {
+    margin: 2rem 0;
+    padding: 1.4rem 1rem;
+    background-color: #fff;
+    border-radius: 1rem;
+}

@@ -1,0 +1,44 @@
+@import "variables";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__checkbox-label {
+    display: inline-block;
+    margin: 0 0 0.5rem 0.5rem;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-error {
+    padding: 1rem;
+    border: 1px solid $col-danger;
+    color: $col-danger;
+  }
+
+  .input-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+  }
+
+  .form-list {
+    margin: 2rem 0 1rem;
+
+    li {
+      margin-bottom: 0.5rem;
+
+      &:not(:last-child) {
+        ::after {
+          content: ',';
+        }
+      }
+    }
+  }
+}

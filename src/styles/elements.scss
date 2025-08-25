@@ -1,0 +1,111 @@
+@use "sass:color";
+@import "variables";
+
+body {
+  margin: 0;
+  background-color: $col-secondary;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin: 0 0 1rem 0;
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+  background-color: $col-primary;
+  border-radius: 0 0 1rem 1rem;
+}
+
+h2 {
+  margin-top: 0;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  box-shadow: #00000088 2px 2px 2px 0;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    box-shadow: #00000088 0 0 2px 0;
+  }
+
+  &.primary {
+    padding: 0.5rem 2.5rem;
+    border: 1px solid #b68557;
+    border-radius: 0.5rem;
+    background-color: $col-primary;
+
+    &:hover {
+      background-color: $col-primary-shade;
+    }
+  }
+
+  &.secondary {
+    padding: 0.5rem 2.5rem;
+    border: 1px solid #b68557;
+    border-radius: 0.5rem;
+    background-color: $col-secondary;
+
+    &:hover {
+      background-color: $col-secondary-shade;
+    }
+  }
+
+  &.close {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0 none;
+    border-radius: 50%;
+    background-color: $col-danger;
+    color: #fff;
+
+    &:hover {
+      background-color: color.adjust($col-danger, $lightness: -7%);
+    }
+  }
+}
+
+label,
+input,
+select {
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+legend {
+  font-size: 1.2rem;
+}
+
+input,
+select {
+  max-width: 250px;
+  padding: 0.5rem;
+  border: 1px solid $col-primary-shade;
+  border-radius: 6px;
+  font-size: 1.2rem;
+}
+
+fieldset {
+  min-width: 0;
+  padding: 1rem;
+}
