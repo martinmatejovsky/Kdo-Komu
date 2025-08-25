@@ -3,8 +3,9 @@
 .page-home {
   &__group-tile {
     display: flex;
-    gap: 2rem;
-    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1rem 2rem;
     margin-bottom: 1rem;
     padding: 1.5rem;
     background-color: #fff;

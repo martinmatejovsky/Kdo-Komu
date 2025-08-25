@@ -9,7 +9,7 @@ interface Props {
     users: User[]
 }
 
-const lastVisiblePayments = 5
+const lastVisiblePayments = 4
 
 const PaymentOverview = memo(function PaymentOverview({payments, users}: Props) {
     const [showingAllPayments, setShowingAllPayments] = useState(false)
@@ -42,14 +42,14 @@ const PaymentOverview = memo(function PaymentOverview({payments, users}: Props) 
     }, [reversedPayments, showingAllPayments, convertPaymentLabels])
 
     return (
-        <section>
+        <section className={'section payments-overview'}>
             <h2>Provedené platby</h2>
-            <div className="payment-wrapper">
+            <div className="payments-overview__wrapper">
                 {payments.length === 0 && (
                     <p>zatím nemáte žádnou uloženou platbu</p>
                 )}
 
-                <ol className={'payment-list'}>
+                <ol className={'payments-overview__list'}>
                     {visiblePayments.map((payment) => (
                         <li key={payment.id}>
                             <PaymentRecord data={payment}/>

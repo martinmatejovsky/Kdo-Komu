@@ -5,6 +5,11 @@
   flex-direction: column;
   gap: 2rem;
 
+  &__checkbox-label {
+    display: inline-block;
+    margin: 0 0 0.5rem 0.5rem;
+  }
+
   .form-row {
     display: flex;
     flex-direction: column;

@@ -1,5 +1,6 @@
-import type {Dispatch, ReactNode, SetStateAction} from "react";
+import {type Dispatch, type ReactNode, type SetStateAction} from "react";
 import '../styles/overlay.scss'
+import * as React from "react";
 
 interface Props {
     children: ReactNode,
@@ -8,8 +9,12 @@ interface Props {
 }
 
 const Overlay = ({children, setClose, title}: Props) => {
+    function handleOutsideClick(e: React.MouseEvent<HTMLDivElement>) {
+        if (e.target === e.currentTarget) setClose(false)
+    }
+
     return (
-        <div className={'overlay'}>
+        <div className={'overlay'} onClick={handleOutsideClick}>
             <div className="overlay__wrapper">
                 <div className="overlay__controls">
                     {title && <h2>{title}</h2>}
