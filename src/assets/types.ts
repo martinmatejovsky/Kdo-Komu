@@ -25,3 +25,14 @@ export interface Group {
     members: User[],
     payments: Payment[],
 }
+
+export interface Balance {
+    userId: number,
+    amount: number,
+}
+
+export interface Transaction {
+    from: number;
+    to: number;
+    amount: number;
+}

@@ -1,15 +1,15 @@
-import {USERS} from '../assets/MockHistory'
 import '../styles/form.scss'
 import {type Dispatch, type FormEvent, type SetStateAction, useState} from "react";
-import type {Group, Payment} from "../assets/types.ts";
+import type {Group, Payment, User} from "../assets/types.ts";
 
 interface Props {
     setGroups: Dispatch<SetStateAction<Group[]>>,
     selectedGroupId: number,
+    users: User[],
     onSubmit?: Function
 }
 
-function FormNewPayment({setGroups, selectedGroupId, onSubmit}: Props) {
+function FormNewPayment({setGroups, selectedGroupId, users, onSubmit}: Props) {
     const [paidForError, setPaidForError] = useState(false)
     const formHtmlId = 'new-payment'
 
@@ -68,7 +68,7 @@ function FormNewPayment({setGroups, selectedGroupId, onSubmit}: Props) {
             <div className={'form-row'}>
                 <label htmlFor={'paid-by'}>Kdo platil</label>
                 <select name="paid-by" id="paid-by" required={true}>
-                    {USERS.map((user) => {
+                    {users.map((user) => {
                         return (
                             <option key={user.id} value={user.id}>{user.name}</option>
                         )
@@ -82,11 +82,11 @@ function FormNewPayment({setGroups, selectedGroupId, onSubmit}: Props) {
                     <p className={'form-error'}>Je nutné vybrat alespoň jednu možnost</p>
                 )}
 
-                {USERS.map((user) => (
+                {users.map((user) => (
                     <label key={user.id} htmlFor={`paid-for-${user.id}`}>
                         <input id={`paid-for-${user.id}`} name={`paid-for`} type="checkbox"
                                value={user.id}/>
-                        {user.name}
+                        <span className="form__checkbox-label">{user.name}</span>
                     </label>
                 ))}
             </fieldset>
