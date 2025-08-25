@@ -3,10 +3,21 @@ import {Routes, Route} from 'react-router-dom'
 import PageGroupDashboard from "./pages/PageGroupDashboard.tsx"
 import PageHome from "./pages/PageHome.tsx";
 import type {Group} from "./assets/types.ts";
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
+
+const storageAppName = 'KdoKomu'
 
 function App() {
-    const [groups, setGroups] = useState<Group[]>([])
+    const [groups, setGroups] = useState<Group[]>(getLocalStorage)
+
+    function getLocalStorage(): Group[] {
+        const savedData = localStorage.getItem(storageAppName);
+        return savedData ? JSON.parse(savedData) : []
+    }
+
+    useEffect(() => {
+        localStorage.setItem(storageAppName, JSON.stringify(groups))
+    }, [groups])
 
     return (
         <Routes>
