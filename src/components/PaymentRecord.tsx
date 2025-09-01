@@ -1,14 +1,14 @@
 import '../styles/paymentRecord.scss'
-import type {PaymentDescription} from "../assets/types.ts";
-import {memo} from "react";
+import type {ActionGroupDashboard, PaymentDescription} from "../assets/types.ts";
+import {type ActionDispatch, memo} from "react";
 
 interface Props {
     data: PaymentDescription,
-    reducerGroupDashboard: () => void,
+    dispatchGroupDashboard: ActionDispatch<[action: ActionGroupDashboard]>,
 }
-const PaymentRecord = memo(function PaymentRecord({data, reducerGroupDashboard}: Props ) {
+const PaymentRecord = memo(function PaymentRecord({data, dispatchGroupDashboard}: Props ) {
     function openEdit() {
-        reducerGroupDashboard({type: 'toggleEditPayment', data: data.id})
+        dispatchGroupDashboard({type: 'toggleEditPayment', data: data.id})
     }
 
     return (
