@@ -16,6 +16,7 @@ interface Props {
 interface State {
      newPayment:boolean,
      editPayment: number | null,
+     deletePayment: number | null,
  }
 
 function reducer(state: State, action: ActionGroupDashboard): State {
@@ -24,6 +25,8 @@ function reducer(state: State, action: ActionGroupDashboard): State {
             return {...state, newPayment: !state.newPayment}
         case 'toggleEditPayment':
             return {...state, editPayment: action?.data || null, }
+        case 'toggleDeletePayment':
+            return {...state, deletePayment: action?.data || null }
         default:
             return {...state}
     }
@@ -32,13 +35,25 @@ function reducer(state: State, action: ActionGroupDashboard): State {
 function PageGroupDashboard({groups, setGroups}: Props) {
     const selectedGroupId = Number(useParams().groupId);
     const navigate = useNavigate()
-    const [stateGroupDashboard, dispatchGroupDashboard] = useReducer(reducer, {newPayment: false, editPayment: null})
+    const [stateGroupDashboard, dispatchGroupDashboard] = useReducer(reducer, {newPayment: false, editPayment: null, deletePayment: null})
 
     const group = groups.find((g) => g.id === selectedGroupId);
     if (!group) {
         return (
             <p>Nenalezena skupina s tímto ID</p>
         )
+    }
+
+    function confirmDeletePayment() {
+        setGroups(oldVal => (
+            oldVal.map(g => {
+                if (g.id !== selectedGroupId) return g
+
+                const newPayments = g.payments.filter(p => p.id !== stateGroupDashboard.deletePayment)
+                return {...g, payments: newPayments}
+            })
+        ))
+        stateGroupDashboard.deletePayment = null
     }
 
     return (
@@ -71,10 +86,23 @@ function PageGroupDashboard({groups, setGroups}: Props) {
             }
 
             {stateGroupDashboard.editPayment &&
-              <Overlay setClose={() => dispatchGroupDashboard({type: 'toggleEditPayment', data: null})}>
+              <Overlay setClose={() => dispatchGroupDashboard({type: 'toggleEditPayment'})}>
                 <FormNewPayment setGroups={setGroups} selectedGroupId={selectedGroupId} users={group.members} groups={groups} editedPaymentId={stateGroupDashboard.editPayment}
                                 onSubmit={() => dispatchGroupDashboard({type: 'toggleEditPayment', data: null})}/>
               </Overlay>
+            }
+
+            {stateGroupDashboard.deletePayment &&
+                <Overlay setClose={() => dispatchGroupDashboard({type: 'toggleDeletePayment'})}>
+                  <div className="page-group__confirmation">
+                    Chcete smazat tuto platbu?
+
+                      <div className="controls">
+                          <button className={'secondary'} onClick={confirmDeletePayment}>Ano</button>
+                          <button className={'secondary'} onClick={() => dispatchGroupDashboard({type: 'toggleDeletePayment'})}>Ne</button>
+                      </div>
+                  </div>
+                </Overlay>
             }
         </div>
     )

@@ -11,6 +11,10 @@ const PaymentRecord = memo(function PaymentRecord({data, dispatchGroupDashboard}
         dispatchGroupDashboard({type: 'toggleEditPayment', data: data.id})
     }
 
+    function openDelete() {
+        dispatchGroupDashboard({type: 'toggleDeletePayment', data: data.id})
+    }
+
     return (
         <div className={'payment-record'}>
             <div className="payment-record__description">
@@ -25,7 +29,10 @@ const PaymentRecord = memo(function PaymentRecord({data, dispatchGroupDashboard}
 
             <div className={'payment-record__price'}><strong>{data.amount} Kč</strong></div>
 
-            <button className="payment-record__edit" onClick={openEdit}></button>
+            <div className="payment-record__controls">
+                <button className="is-edit" onClick={openEdit}></button>
+                <button className="is-delete" onClick={openDelete}></button>
+            </div>
         </div>
     )
 })

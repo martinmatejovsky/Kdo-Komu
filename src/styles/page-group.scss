@@ -2,4 +2,10 @@
   &__members {
     margin: 2rem 0;
   }
+
+  &__confirmation {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
