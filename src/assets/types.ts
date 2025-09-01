@@ -36,3 +36,8 @@ export interface Transaction {
     to: number;
     amount: number;
 }
+
+export interface ActionGroupDashboard {
+    type: string,
+    data?: number | null,
+}

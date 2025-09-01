@@ -1,17 +1,18 @@
-import {useCallback, useMemo, useState} from "react";
+import {type ActionDispatch, useCallback, useMemo, useState} from "react";
 import PaymentRecord from "./PaymentRecord.tsx";
-import type {PaymentDescription, Payment, User} from "../assets/types.ts";
+import type {PaymentDescription, Payment, User, ActionGroupDashboard} from "../assets/types.ts";
 import {memo} from "react";
 import '../styles/payment-overview.scss'
 
 interface Props {
     payments: Payment[],
-    users: User[]
+    users: User[],
+    dispatchGroupDashboard: ActionDispatch<[action: ActionGroupDashboard]>,
 }
 
 const lastVisiblePayments = 4
 
-const PaymentOverview = memo(function PaymentOverview({payments, users}: Props) {
+const PaymentOverview = memo(function PaymentOverview({payments, users, dispatchGroupDashboard}: Props) {
     const [showingAllPayments, setShowingAllPayments] = useState(false)
 
     const reversedPayments = useMemo(() => [...payments].reverse(), [payments])
@@ -52,7 +53,7 @@ const PaymentOverview = memo(function PaymentOverview({payments, users}: Props) 
                 <ol className={'payments-overview__list'}>
                     {visiblePayments.map((payment) => (
                         <li key={payment.id}>
-                            <PaymentRecord data={payment}/>
+                            <PaymentRecord data={payment} dispatchGroupDashboard={dispatchGroupDashboard}/>
                         </li>
                     ))}
                 </ol>
