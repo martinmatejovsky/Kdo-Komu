@@ -2,7 +2,15 @@ import '../styles/paymentRecord.scss'
 import type {PaymentDescription} from "../assets/types.ts";
 import {memo} from "react";
 
-const PaymentRecord = memo(function PaymentRecord({data}: { data: PaymentDescription }) {
+interface Props {
+    data: PaymentDescription,
+    reducerGroupDashboard: () => void,
+}
+const PaymentRecord = memo(function PaymentRecord({data, reducerGroupDashboard}: Props ) {
+    function openEdit() {
+        reducerGroupDashboard({type: 'toggleEditPayment', data: data.id})
+    }
+
     return (
         <div className={'payment-record'}>
             <div className="payment-record__description">
@@ -14,7 +22,10 @@ const PaymentRecord = memo(function PaymentRecord({data}: { data: PaymentDescrip
                     <div>za: {data.paidForNames.join(', ')}</div>
                 </div>
             </div>
+
             <div className={'payment-record__price'}><strong>{data.amount} Kč</strong></div>
+
+            <button className="payment-record__edit" onClick={openEdit}></button>
         </div>
     )
 })

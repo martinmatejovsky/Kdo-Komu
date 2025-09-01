@@ -1,7 +1,7 @@
 import PaymentOverview from "../components/PaymentsOverview.tsx";
 import Overlay from "../components/Overlay.tsx";
 import FormNewPayment from "../components/FormNewPayment.tsx";
-import {type Dispatch, type SetStateAction, useState} from "react";
+import {type Dispatch, type SetStateAction, useReducer} from "react";
 import type {Group} from "../assets/types.ts"
 import {useParams, useNavigate} from "react-router-dom";
 import "../styles/page-group.scss"
@@ -12,9 +12,31 @@ interface Props {
     groups: Group[],
     setGroups: Dispatch<SetStateAction<Group[]>>
 }
+ interface State {
+     newPayment:boolean,
+     editPayment: number | null,
+ }
+
+ interface Action {
+    type: string,
+ data?: number | null,
+ }
+
+function reducer(state: State, action: Action): State {
+    switch (action.type) {
+        case 'toggleNewPayment':
+            return {...state, newPayment: !state.newPayment}
+        case 'toggleEditPayment':
+            return {...state, editPayment: action?.data || null, }
+        default:
+            return {...state}
+    }
+}
 
 function PageGroupDashboard({groups, setGroups}: Props) {
     const selectedGroupId = Number(useParams().groupId);
+    const navigate = useNavigate()
+    const [state, dispatch] = useReducer(reducer, {newPayment: false, editPayment: null})
 
     const group = groups.find((g) => g.id === selectedGroupId);
     if (!group) {
@@ -22,9 +44,6 @@ function PageGroupDashboard({groups, setGroups}: Props) {
             <p>Nenalezena skupina s tímto ID</p>
         )
     }
-
-    let navigate = useNavigate()
-    const [creatingPayment, setCreatingPayment] = useState(false)
 
     return (
         <div className={'page-group'}>
@@ -37,24 +56,29 @@ function PageGroupDashboard({groups, setGroups}: Props) {
                     Zpět
                 </button>
 
-                <button type={'button'} className={'primary new-payment'} onClick={() => {
-                    setCreatingPayment((oldVal) => !oldVal)
-                }}>
+                <button type={'button'} className={'primary new-payment'} onClick={() => dispatch({type: 'toggleNewPayment'})}>
                     nová platba
                 </button>
             </div>
 
             <GroupMembersList group={group}/>
 
-            <PaymentOverview payments={group.payments} users={group.members}/>
+            <PaymentOverview payments={group.payments} users={group.members} dispatchGroupDashboard={dispatch}/>
 
             <SettleScore group={group}/>
 
-            {creatingPayment &&
-                <Overlay title={'Nová platba'} setClose={setCreatingPayment}>
+            {state.newPayment &&
+                <Overlay title={'Nová platba'} setClose={() => dispatch({type: 'toggleNewPayment'})}>
                   <FormNewPayment setGroups={setGroups} selectedGroupId={selectedGroupId} users={group.members}
-                                  onSubmit={() => setCreatingPayment(false)}/>
+                                  onSubmit={() => dispatch({type: 'toggleNewPayment'})}/>
                 </Overlay>
+            }
+
+            {state.editPayment &&
+              <Overlay setClose={() => dispatch({type: 'toggleEditPayment', data: null})}>
+                <FormNewPayment setGroups={setGroups} selectedGroupId={selectedGroupId} users={group.members}
+                                onSubmit={() => dispatch({type: 'toggleEditPayment', data: null})}/>
+              </Overlay>
             }
         </div>
     )
